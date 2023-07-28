@@ -1,0 +1,127 @@
+<div class="card">
+  <p-table
+    #dt
+    [value]="rows"
+    [(selection)]="rows"
+    dataKey="id"
+    [rowHover]="true"
+    [rows]="25"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [loading]="loading"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0"
+    [globalFilterFields]="['name_', 'email', 'phone']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="table-header">Listado de usuarios</div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name_" style="min-width: 14rem">
+          <div class="flex justify-content-between align-items-center">
+            Nombre
+            <p-sortIcon field="name_"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="name_"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="email" style="min-width: 14rem">
+          <div class="flex justify-content-between align-items-center">
+            Email
+            <p-sortIcon field="email"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="email"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="phone" style="min-width: 14rem">
+          <div class="flex justify-content-between align-items-center">
+            Telefono
+            <p-sortIcon field="phone"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="phone"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="user_type.name_" style="min-width: 10rem">
+          <div class="flex justify-content-between align-items-center">
+            Tipo de usuario
+            <p-sortIcon field="user_type.name_"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="user_type.name_"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 5rem"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row>
+      <tr class="p-selectable-row">
+        <td>
+          <span class="p-column-title">Nombre</span>
+          {{ row.name_ }}
+        </td>
+        <td>
+          <span class="p-column-title">Email</span>
+          <span class="ml-1 vertical-align-middle">{{ row.email }}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Telefono</span>
+          <span class="ml-1 vertical-align-middle">{{ row.phone }}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Tipo de usuario</span>
+          {{ row.user_type.name_ }}
+        </td>
+        <td style="text-align: center">
+          <button
+            pButton
+            type="button"
+            class="p-button-primary"
+            icon="pi pi-pencil"
+            [pTooltip]="'editar'"
+            tooltipPosition="left"
+            (click)="edit(row.user_id)"
+          ></button>
+          <button
+            pButton
+            type="button"
+            class="p-button-secondary"
+            [pTooltip]="'Asignar cursos'"
+            tooltipPosition="left"
+            icon="pi pi-cog"
+          ></button>
+          <button
+            pButton
+            type="button"
+            class="p-button-danger"
+            icon="pi pi-trash"
+            [pTooltip]="'Eliminar'"
+            tooltipPosition="left"
+            (click)="delete(row.user_id)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">No customers found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
