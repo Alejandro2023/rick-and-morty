@@ -5,11 +5,13 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./modules/school/module.module').then((m) => m.ModuleModule),
+      import('./modules/rick_and_morty/module.module').then(
+        (m) => m.ModuleModule
+      ),
   },
   {
     path: '**',
-    redirectTo: 'user',
+    redirectTo: 'character',
   },
 ];
 

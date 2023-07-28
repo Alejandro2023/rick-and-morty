@@ -1,0 +1,31 @@
+<div class="header w-100 h-3 m-2">
+  <p-button
+    [routerLink]="['/user']"
+    label="Usuarios"
+    styleClass="p-button-rounded p-button-success"
+  ></p-button>
+  <p-button
+    (click)="logout()"
+    label="Cerrar sesión"
+    styleClass="p-button-rounded p-button-danger"
+  ></p-button>
+</div>
+<div *ngIf="!isLogout">
+  <app-course-form
+    *ngIf="isCreate"
+    [list]="list"
+    [editId]="editId"
+    (list2)="toggle($event)"
+    (edit2)="toggleEdit($event)"
+    [isCreate]="isCreate"
+    (isCreateOutput)="toggleCreate($event)"
+  ></app-course-form>
+  <app-course-list
+    *ngIf="!isCreate"
+    [list]="list"
+    (list2)="toggle($event)"
+    (editId)="toggleEdit($event)"
+    (isCreate)="toggleCreate($event)"
+    (isLogout)="toggleLogout($event)"
+  ></app-course-list>
+</div>

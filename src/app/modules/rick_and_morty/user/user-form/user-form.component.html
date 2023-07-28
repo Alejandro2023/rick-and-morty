@@ -1,0 +1,82 @@
+<div class="header">
+  <p-button
+    (click)="cleanForm()"
+    label="Lista"
+    styleClass="p-button-outlined"
+    icon="pi pi-arrow-left"
+  ></p-button>
+  <p-button
+    (click)="save()"
+    label="Guardar"
+    icon="pi pi-cloud"
+    [disabled]="!form.valid"
+    styleClass="p-button-outlined"
+  ></p-button>
+</div>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="d-flex row m-2">
+    <div class="col-6 p-1">
+      <label for="name_" class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name_"
+        [class.is-invalid]="invalidName"
+      />
+      <small *ngIf="invalidName" class="text-danger"
+        >Ingrese un nombre valido</small
+      >
+    </div>
+    <div class="col-6 p-1">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        [class.is-invalid]="invalidEmail"
+      />
+      <small *ngIf="invalidEmail" class="text-danger"
+        >Ingrese un email valido</small
+      >
+    </div>
+    <div class="col-6 p-1">
+      <label for="phone" class="form-label">Telefono</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="phone"
+        [class.is-invalid]="invalidPhone"
+      />
+      <small *ngIf="invalidPhone" class="text-danger"
+        >Ingrese un Telefono valido</small
+      >
+    </div>
+    <div class="col-6 p-1">
+      <label for="password" class="form-label">Contraseña</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password_"
+        [class.is-invalid]="invalidPassword"
+        formControlName="password_"
+      />
+      <small *ngIf="invalidPassword" class="text-danger"
+        >La contraseña debe tener un minimo de 6 caracteres</small
+      >
+    </div>
+    <div class="col-12 p-1">
+      <label for="userType">Tipo de usuario</label>
+      <p-dropdown
+        class="w-100"
+        [options]="userTypes"
+        formControlName="user_type_id"
+        placeholder="Seleccione un tipo de usuario"
+        optionLabel="name_"
+        id="userTypes"
+        name="userTypes"
+        optionValue="user_type_id"
+      ></p-dropdown>
+    </div>
+  </div>
+</form>

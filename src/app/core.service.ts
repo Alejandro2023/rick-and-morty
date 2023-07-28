@@ -1,14 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoreService {
-  url = 'http://localhost:8000/api';
+  url = 'http://127.0.0.1:8000/api';
+  urlRickAndMortyAPI = 'https://rickandmortyapi.com/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
+
+  login(data: object) {
+    this.http.post<any>(this.url + '/login', data).subscribe((r) => {
+      this.router.navigate(['user']);
+    });
+  }
+
+  logout() {
+    return localStorage.removeItem('token');
+  }
 
   user(id: number): Observable<any> {
     return this.http.get<any>(this.url + '/user_show/' + id);
@@ -17,6 +29,11 @@ export class CoreService {
   userPost(data: object): Observable<any> {
     return this.http.post<any>(this.url + '/user_post', data);
   }
+
+  userCoursePost(data: object): Observable<any> {
+    return this.http.post<any>(this.url + '/user_course_post', data);
+  }
+
   userPut(id: number, data: object): Observable<any> {
     return this.http.put<any>(this.url + '/user_put/' + id, data);
   }
@@ -51,5 +68,29 @@ export class CoreService {
 
   getUserType(): Observable<any> {
     return this.http.get<any>(this.url + '/user_types');
+  }
+
+  getCharacters(): Observable<any> {
+    return this.http.get<any>(this.urlRickAndMortyAPI + '/character');
+  }
+
+  getCharacter(id: number): Observable<any> {
+    return this.http.get<any>(this.urlRickAndMortyAPI + '/character/' + id);
+  }
+
+  getLocations(): Observable<any> {
+    return this.http.get<any>(this.urlRickAndMortyAPI + '/location');
+  }
+
+  getLocation(id: number): Observable<any> {
+    return this.http.get<any>(this.urlRickAndMortyAPI + '/location/' + id);
+  }
+
+  getEpisodes(): Observable<any> {
+    return this.http.get<any>(this.urlRickAndMortyAPI + '/episode');
+  }
+
+  getEpisode(id: number): Observable<any> {
+    return this.http.get<any>(this.urlRickAndMortyAPI + '/episode/' + id);
   }
 }
