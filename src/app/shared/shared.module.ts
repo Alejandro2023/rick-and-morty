@@ -8,6 +8,10 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { DialogModule } from 'primeng/dialog';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ImageModule } from 'primeng/image';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [],
@@ -21,6 +25,10 @@ import { TooltipModule } from 'primeng/tooltip';
     RippleModule,
     TableModule,
     TooltipModule,
+    DialogModule,
+    MultiSelectModule,
+    ImageModule,
+    TagModule,
   ],
   exports: [
     SelectButtonModule,
@@ -31,6 +39,10 @@ import { TooltipModule } from 'primeng/tooltip';
     RippleModule,
     TableModule,
     TooltipModule,
+    DialogModule,
+    MultiSelectModule,
+    ImageModule,
+    TagModule,
   ],
 })
 export class SharedModule {}

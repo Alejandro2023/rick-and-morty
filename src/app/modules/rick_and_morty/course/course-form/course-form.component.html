@@ -1,0 +1,44 @@
+<div class="header">
+  <p-button
+    (click)="cleanForm()"
+    label="Lista"
+    styleClass="p-button-outlined"
+    icon="pi pi-arrow-left"
+  ></p-button>
+  <p-button
+    (click)="save()"
+    label="Guardar"
+    icon="pi pi-cloud"
+    [disabled]="!form.valid"
+    styleClass="p-button-outlined"
+  ></p-button>
+</div>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="d-flex row m-2">
+    <div class="col-6 p-1">
+      <label for="name" class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name_"
+        formControlName="name_"
+        [class.is-invalid]="invalidName"
+      />
+      <small *ngIf="invalidName" class="text-danger"
+        >Ingrese un nombre valido</small
+      >
+    </div>
+    <div class="col-6 p-1">
+      <label for="hourlyintensity" class="form-label">Intensidad horaria</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="hourlyintensity"
+        [class.is-invalid]="invalidHour"
+      />
+      <small *ngIf="invalidHour" class="text-danger"
+        >Ingrese un nombre valido</small
+      >
+    </div>
+  </div>
+</form>

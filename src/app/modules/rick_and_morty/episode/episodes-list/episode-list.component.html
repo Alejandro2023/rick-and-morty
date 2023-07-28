@@ -1,0 +1,125 @@
+<!-- <div class="header">
+  <p-button
+    (click)="statusForm()"
+    label="Crear nuevo"
+    styleClass="p-button-outlined"
+    class="my-2"
+    icon="pi pi-plus"
+  ></p-button>
+</div> -->
+<p-table
+  #dt
+  class="p-datatable"
+  [value]="rows"
+  [(selection)]="rows"
+  dataKey="id"
+  [rowHover]="true"
+  [rows]="25"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [loading]="loading"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [filterDelay]="0"
+  [globalFilterFields]="['name', 'episode']"
+>
+  <ng-template pTemplate="caption">
+    <div class="table-header">Episodes of rick y morty</div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="'name'" style="min-width: 10rem">
+        <div class="flex justify-content-between align-items-center">
+          Name
+          <p-sortIcon field="name"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="name"
+            display="menu"
+            class="ml-auto"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="episode" style="min-width: 14rem">
+        <div class="flex justify-content-between align-items-center">
+          Episode
+          <p-sortIcon field="episode"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="episode"
+            display="menu"
+            class="ml-auto"
+          ></p-columnFilter>
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-row>
+    <tr class="p-selectable-row" (click)="getEpisode(row.id)">
+      <td>
+        <span class="p-column-title">Name</span>
+        {{ row.name }}
+      </td>
+      <td>
+        <span class="p-column-title">Episode</span>
+        <span class="ml-1 vertical-align-middle">{{ row.episode }}</span>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No customers found.</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  header="{{ isModalByEpisodeOpen ? infoByEpisode['name'] : '' }}"
+  [(visible)]="isModalByEpisodeOpen"
+  [modal]="true"
+  [style]="{ width: '50vw', height: '40vw' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div *ngIf="isModalByEpisodeOpen" class="card p-2 w-100 h-100">
+    <div class="flex justify-content-between w-100 pt-2">
+      <div class="col-4 p-0">
+        <p-tag [ngClass]="'color-gray'">
+          <div>
+            <i [ngClass]="'fas fa-photo-film'"></i>
+          </div>
+        </p-tag>
+        <span class="ml-2" [pTooltip]="'Type'">{{
+          infoByEpisode["episode"]
+        }}</span>
+      </div>
+      <span class="col p-0 text-end" [pTooltip]="'Created'">{{
+        infoByEpisode["dateFormat"] + " " + infoByEpisode["hourFormat"]
+      }}</span>
+    </div>
+
+    <div class="flex justify-content-between w-100 py-3">
+      <div class="col p-0">
+        <p-tag [ngClass]="'green-earth'">
+          <div>
+            <i [ngClass]="'fas fa-calendar-days'"></i>
+          </div>
+        </p-tag>
+        <span class="ml-2">{{ "Air Date: " + infoByEpisode["air_date"] }}</span>
+      </div>
+    </div>
+
+    <div class="flex w-100">
+      <div class="col p-0">
+        <p-tag [ngClass]="'color-gray'">
+          <div>
+            <i [ngClass]="'fas fa-users'"></i>
+          </div>
+        </p-tag>
+        <span class="ml-2">{{
+          "Characters: " + infoByEpisode["characters"].length
+        }}</span>
+      </div>
+    </div>
+  </div>
+</p-dialog>
